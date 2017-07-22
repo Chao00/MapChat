@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  h5 By #{name}
+
+  table
+    tr
+      th SNUM
+      th First Name
+      th Last Name
+      th Age
+    each student,i in students
+      tr
+        td=i
+        td=student.firstName
+        td=student.lastName
+        td=student.age
