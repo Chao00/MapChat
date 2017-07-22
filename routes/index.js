@@ -27,12 +27,16 @@ router.get('/new', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   Student.findById(req.params.id, function(err, doc) {
-    res.send(doc);
+    res.render('detail', {student: doc})
   });
 });
 
 router.post('/new', function(req,res,next) {
 
+    var newStudent = new Student(req.body)
+    newStudent.save(function(err,doc) {
+      res.redirect('/')
+    })
 
 
 });

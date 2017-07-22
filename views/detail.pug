@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    table
+        tr
+            th SNUM
+            th First Name
+            th Last Name
+            th Age
+
+        tr
+            td=student._id
+            td=student.firstName
+            td=student.lastName
+            td=student.age
+    a(href='/') Back
