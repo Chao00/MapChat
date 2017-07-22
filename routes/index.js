@@ -21,4 +21,10 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.get('/:id', function(req, res, next) {
+  Student.findById(req.params.id, function(err, doc) {
+    res.send(doc);
+  });
+});
+
 module.exports = router;

@@ -14,6 +14,7 @@ block content
     each student,i in students
       tr
         td=i
-        td=student.firstName
+        td
+          a(href='/'+student._id)=student.firstName
         td=student.lastName
         td=student.age
