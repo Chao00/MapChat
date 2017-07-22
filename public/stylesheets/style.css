@@ -14,3 +14,7 @@ td {
 td,th {
   padding: 10px;
 }
+
+input {
+  margin-bottom: 10px;
+}

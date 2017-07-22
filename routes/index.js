@@ -16,15 +16,25 @@ var Student = mongoose.model('Students', studentSchema, 'students');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Student.find().exec(function(err, doc) {
+  Student.find({}, function(err, doc) {
       res.render('index', { title: 'WebDxD', name: 'Yan', students: doc });
   })
+});
+
+router.get('/new', function(req, res, next) {
+  res.render('new', {})
 });
 
 router.get('/:id', function(req, res, next) {
   Student.findById(req.params.id, function(err, doc) {
     res.send(doc);
   });
+});
+
+router.post('/new', function(req,res,next) {
+
+
+
 });
 
 module.exports = router;
