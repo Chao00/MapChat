@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-
-
-// app.js
-
 /**
  * Module dependencies.
  */
@@ -18,18 +14,7 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 
-
-io.on('connection', function(socket) {
-    console.log('new connection.')
-    socket.on('disconnect', function() {
-      console.log('discounncted');
-    })
-    socket.on('chat', function(txt) {
-      io.emit('chat broadcast', txt);
-      console.log(txt);
-    })
-})
-
+var socket = require('./socket')(io);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
