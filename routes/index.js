@@ -1,20 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/hackhub');
-
-var studentSchema = {
-    username: String,
-    password: String,
-    firstName: String,
-    lastName: String,
-    school: String,
-    enrolled: Boolean,
-    age: Number
-}
-
-var Student = mongoose.model('Students', studentSchema, 'students');
+var Student = require('../models/student')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

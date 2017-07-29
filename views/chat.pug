@@ -49,6 +49,9 @@ block style
         }
 
 block content
+    if (user)
+        p#username #{user.username}
+        a(href="/logout") Logout
     ul#messages
     form(action="")
         input#m(autocomplete="off" required)
@@ -60,13 +63,13 @@ block script
     script.
         var socket = io();
         $('form').submit(function(){
-            socket.emit('chat', $('#m').val());
+            socket.emit('chat', { user: $('#username').text(), msg: $('#m').val()});
             $('#m').val('');
             return false;
         })
-        socket.on('chat broadcast', function(txt) {
-            console.log(txt)
-            var msg = $('<li>').text(txt)
+        socket.on('chat broadcast', function(obj) {
+            console.log(obj)
+            var msg = $('<li>').text(obj.user + ': ' + obj.msg)
             console.log(msg)
             $('#messages').append(msg)
         })
