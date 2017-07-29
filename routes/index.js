@@ -5,6 +5,8 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/hackhub');
 
 var studentSchema = {
+    username: String,
+    password: String,
     firstName: String,
     lastName: String,
     school: String,
