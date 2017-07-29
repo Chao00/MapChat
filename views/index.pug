@@ -15,7 +15,7 @@ block content
       tr
         td=i
         td
-          a(href='/'+student._id)=student.firstName
+          a(href='/student/'+student._id)=student.firstName
         td=student.lastName
         td=student.age
-  a(href='/new') New
+  a(href='/student/new') New
