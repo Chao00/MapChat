@@ -20,7 +20,7 @@ router.post('/student', function(req,res,next) {
     if (req.body._id) {
         // Update student
         Student.findOneAndUpdate({_id: req.body._id}, req.body, {new: true}, function (err, doc) {
-            res.send(doc);
+            res.send({data: doc, isNew: false});
         });
 
     } else {
@@ -30,7 +30,8 @@ router.post('/student', function(req,res,next) {
             if (err) {
                 console.log(err);
             } else {
-                res.send(doc);
+                doc.isNew = true
+                res.send({data: doc, isNew: true});
             }
         });
     }

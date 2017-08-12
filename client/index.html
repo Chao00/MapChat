@@ -13,11 +13,59 @@
 
             <div ng-repeat="student in students">
 
-                <h1>{{ student.firstName }}</h1>
+                <h1 ng-click="getStudentDetail(student._id)">{{ student.firstName }}</h1>
+
+            </div>
+
+            <div class="add-new" ng-click="clearClickedStudent()">
+
+                <h1>Add New</h1>
 
             </div>
 
         </div>
+
+        <div ng-show="clickedStudent" class="student-detail">
+
+            <span>First Name</span>
+            <p>{{ clickedStudent.firstName }}</p>
+            <span>Last Name</span>
+            <p>{{ clickedStudent.lastName }}</p>
+            <span>Age</span>
+            <p>{{ clickedStudent.age }}</p>
+            <span>School</span>
+            <p>{{ clickedStudent.school }}</p>
+
+            <button ng-click="showEditForm()">Edit</button>
+            <button class="delete-btn" ng-click="deleteStudent(clickedStudent._id)">Delete</button>
+
+        </div>
+
+
+        <div ng-hide="clickedStudent" class="student-detail">
+
+            <span>First Name</span>
+
+            <div>
+                <input type="text" name="firstName" ng-model="newStudent.firstName">
+            </div>
+            <span>Last Name</span>
+            <div>
+                <input type="text" name="lastName" ng-model="newStudent.lastName">
+            </div>
+            <span>Age</span>
+            <div>
+                <input type="text" name="age" ng-model="newStudent.age">
+            </div>
+            <span>School</span>
+            <div>
+                <input type="text" name="school" ng-model="newStudent.school">
+            </div>
+
+            <button ng-click="createNewStudent()">Submit</button>
+
+        </div>
+
     </div>
 </body>
 </html>
