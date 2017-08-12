@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <link rel="stylesheet" href="/stylesheets/ng-style.min.css">
+    <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/app.js"></script>
+</head>
+<body ng-app="student">
+    <div ng-controller="studentController">
+        <div class="student-list">
+
+            <div ng-repeat="student in students">
+
+                <h1>{{ student.firstName }}</h1>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

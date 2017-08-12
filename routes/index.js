@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var Student = require('../models/student');
+var path = require('path');
+var appDir = path.dirname(require.main.filename);
+
+// var clientDir = path.join(__dirname + '../client');
+
+// GET Angular App HTML
+
+router.get('/ng', function(req, res, next) {
+    res.sendFile(appDir + '/client/index.html');
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

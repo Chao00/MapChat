@@ -21,6 +21,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var socket = require('./socket')(io);
 
+var api = require('./routes/api');
 var users = require('./routes/users');
 var chat = require('./routes/chat');
 var index = require('./routes/index');
@@ -54,6 +55,7 @@ passport.use(new LocalStrategy(Student.authenticate()));
 passport.serializeUser(Student.serializeUser());
 passport.deserializeUser(Student.deserializeUser());
 
+app.use('/api', api);
 app.use('/users', users);
 app.use('/chat', chat);
 app.use('/student', index);
