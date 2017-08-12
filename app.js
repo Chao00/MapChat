@@ -26,6 +26,15 @@ var users = require('./routes/users');
 var chat = require('./routes/chat');
 var index = require('./routes/index');
 
+var cors = require('express-cors')
+
+app.use(cors({
+    allowedOrigins: [
+        '52.27.32.249'
+    ]
+
+}))
+
 mongoose.connect('mongodb://webdxd:webdxd@ds151951.mlab.com:51951/hackhub');
 
 // view engine setup

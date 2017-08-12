@@ -1,5 +1,5 @@
 var myapp = angular.module('student', []);
-var host = 'http://localhost:3000/api/';
+var host = '/api/';
 
 myapp.controller('studentController', function($http, $scope) {
 
