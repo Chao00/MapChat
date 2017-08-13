@@ -30,7 +30,7 @@ var cors = require('express-cors')
 
 app.use(cors({
     allowedOrigins: [
-        '52.27.32.249', '127.0.0.1'
+        '52.27.32.249', '127.0.0.1:8080'
     ]
 
 }))
