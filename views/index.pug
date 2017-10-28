@@ -11,7 +11,8 @@ block content
       th age
     each student in students
       tr
-        td=student.firstname
+        td
+          a(href=student._id)=student.firstname
         td=student.lastname
         td=student.email
         td=student.age

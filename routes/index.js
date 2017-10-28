@@ -9,6 +9,12 @@ router.get('/', (req, res, next) => {
   })
 })
 
+router.get('/:id', (req, res, next) => {
+  Students.findById(req.params.id, (err, student) =>{
+    res.render('detail', { student })
+  })
+})
+
 router.get('/new', (req, res, next) => {
   res.render('new');
 })

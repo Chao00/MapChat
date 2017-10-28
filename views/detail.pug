@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  form
+    label First Name
+    br
+    input(name="firstname" value=student.firstname type="text")
+    br
+    label Last Name
+    br
+    input(name="lastname" value=student.lastname type="text")
+    br
+    label Email
+    br
+    input(name="email" value=student.email type="text")
+    br
+    label Age
+    br
+    input(name="age" value=student.age type="number")
+    br
+    input(type='submit')
