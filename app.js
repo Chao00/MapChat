@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev')); // log requests in server console
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // parse client request data to json format
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -34,7 +34,7 @@ mongoose.connect('mongodb://localhost/hackhub', { useMongoClient:true });
 
 // get request
 app.get('/', (req, res, next) => {
-    res.send('Hello World!');
+    res.send('Welcome to WebDxD Full-stack Course!');
 })
 
 // catch 404 and forward to error handler
