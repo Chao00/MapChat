@@ -38,21 +38,21 @@ mongoose.connect('mongodb://localhost/webdxd', { useMongoClient:true });
 //routers
 app.use('/', index);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+// // catch 404 and forward to error handler
+// app.use((req, res, next) => {
+//     const err = new Error('Not Found');
+//     err.status = 404;
+//     next(err);
+// });
 
-// error handler
-app.use((err, req,res,next)=>{
+// // error handler
+// app.use((err, req,res,next)=>{
 
-    res.locals.message = err.message;
+//     res.locals.message = err.message;
 
-    res.status(err.status);
-    res.render('error');
-})
+//     res.status(err.status);
+//     res.render('error');
+// })
 
 /**
  * Get port from environment and store in Express.

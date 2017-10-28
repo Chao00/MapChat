@@ -15,18 +15,18 @@ router.get('/:id', (req, res, next) => {
   })
 })
 
-router.get('/new', (req, res, next) => {
+router.get('/student/new', (req, res, next) => {
   res.render('new');
 })
 
-router.post('/new', (req, res, next) => {
+router.post('/student/new', (req, res, next) => {
   const student = new Students(req.body)
   student.save((err, doc)=>{
     if (err){
       res.send(err)
     }
     else{
-      res.redirect('ok')
+      res.redirect('/')
     }
   })
 })
