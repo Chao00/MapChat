@@ -13,6 +13,9 @@ const app = express();
 
 const mongoose = require('mongoose');
 
+//routers
+const index = require('./routes/index.js');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -30,12 +33,10 @@ app.use(require('express-session')({
 }));
 
 // mongoose
-mongoose.connect('mongodb://localhost/hackhub', { useMongoClient:true });
+mongoose.connect('mongodb://localhost/webdxd', { useMongoClient:true });
 
-// get request
-app.get('/', (req, res, next) => {
-    res.send('Welcome to WebDxD Full-stack Course!');
-})
+//routers
+app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -45,7 +46,13 @@ app.use((req, res, next) => {
 });
 
 // error handler
+app.use((err, req,res,next)=>{
 
+    res.locals.message = err.message;
+
+    res.status(err.status);
+    res.render('error');
+})
 
 /**
  * Get port from environment and store in Express.
