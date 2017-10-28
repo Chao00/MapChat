@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 Add new student
+  form(action='/new' method="POST")
+    label First Name
+    br
+    input(name="firstname" type="text")
+    br
+    label Last Name
+    br
+    input(name="lastname" type="text")
+    br
+    label Email
+    br
+    input(name="email" type="text")
+    br
+    label Age
+    br
+    input(name="age" type="number")
+    br
+    input(type='submit' value='Add')

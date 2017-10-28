@@ -6,8 +6,8 @@ const StudentsSchema = new Schema({
   lastname: String,
   email: String,
   age: Number,
-  createdAt: { type: Date, default: new Date()},
-  studentType: { type: String, enum:['international', 'domestic'] }
+  // createdAt: { type: Date, default: new Date()},
+  // studentType: { type: String, enum:['international', 'domestic'] }
 })
 
 const Students = mongoose.model('students', StudentsSchema);

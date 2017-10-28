@@ -9,3 +9,12 @@ block content
       th Lastname
       th email
       th age
+    each student in students
+      tr
+        td=student.firstname
+        td=student.lastname
+        td=student.email
+        td=student.age
+  br
+  a(href='/new') New 
+
