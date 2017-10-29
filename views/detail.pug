@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Student Detail
-  form
+  form(action=`/${student._id}` method="POST")
     label First Name
     br
     input(name="firstname" value=student.firstname type="text")
@@ -19,4 +19,4 @@ block content
     br
     input(name="age" value=student.age type="number")
     br
-    input(type='submit')
+    input(type='submit' value="update")

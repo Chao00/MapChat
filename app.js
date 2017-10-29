@@ -33,7 +33,7 @@ app.use(require('express-session')({
 }));
 
 // mongoose
-mongoose.connect('mongodb://localhost/webdxd', { useMongoClient:true });
+mongoose.connect('mongodb://webdxd:webdxd2017@ds013918.mlab.com:13918/fs-oct17', { useMongoClient:true });
 
 //routers
 app.use('/', index);

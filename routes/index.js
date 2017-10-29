@@ -15,6 +15,17 @@ router.get('/:id', (req, res, next) => {
   })
 })
 
+router.post('/:id', (req, res, next) => {
+  Students.update({_id:req.params.id}, { $set: req.body }, err =>{
+    if(err){
+      res.send(err)
+    }
+    else{
+      res.redirect('/')
+    }
+  })
+})
+
 router.get('/student/new', (req, res, next) => {
   res.render('new');
 })
