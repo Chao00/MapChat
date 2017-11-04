@@ -13,16 +13,11 @@ var http = require('http');
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io')(server);
+var socket = require('./socket')(io);
 
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
-var socket = require('./socket')(io);
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-var chat = require('./routes/chat');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,28 +31,55 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(require('express-session')({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
-}));
+app.use(require('express-session')({secret: 'keyboard cat'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport config
-var Account = require('./models/student');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
-
-// mongoose
-mongoose.connect('mongodb://localhost/hackhub');
-
-
+// Define Router
+var index = require('./routes/index');
+var users = require('./routes/users');
+var chat = require('./routes/chat');
 
 app.use('/users', users);
 app.use('/chat', chat);
 app.use('/', index);
+
+// passport config
+var Student = require('./models/student');
+// passport.use(new LocalStrategy(Account.authenticate()));
+
+passport.use(new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password'
+    },
+    function(email, password, done) {
+        var options = {
+            criteria: { email: email },
+            select: 'name email hashed_password salt'
+        };
+        User.load(options, function (err, user) {
+            if (err) return done(err)
+            if (!user) {
+                return done(null, false, { message: 'Unknown user' });
+            }
+            if (!user.authenticate(password)) {
+                return done(null, false, { message: 'Invalid password' });
+            }
+            return done(null, user);
+        });
+    }
+));
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    Student.findById(id, function (err, user) {
+        done(err, user);
+    });
+});
+// mongoose
+mongoose.connect('mongodb://localhost/hackhub');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

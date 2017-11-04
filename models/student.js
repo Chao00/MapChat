@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
+// var passportLocalMongoose = require('passport-local-mongoose');
 
 var Student  = new Schema ({
     username: String,
@@ -12,6 +12,6 @@ var Student  = new Schema ({
     age: Number
 })
 
-Student.plugin(passportLocalMongoose);
+// Student.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Students', Student, 'students');

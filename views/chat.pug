@@ -49,9 +49,6 @@ block style
         }
 
 block content
-    if (user)
-        p#username #{user.username}
-        a(href="/logout") Logout
     ul#messages
     form(action="")
         input#m(autocomplete="off" required)
@@ -62,14 +59,12 @@ block script
     script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js")
     script.
         var socket = io();
-        $('form').submit(function(){
-            socket.emit('chat', { user: $('#username').text(), msg: $('#m').val()});
-            $('#m').val('');
-            return false;
+        $('form').submit(function(e) {
+            e.preventDefault();
+            socket.emit('chat message', $('#m').val());
+            $('#m').val('')
         })
-        socket.on('chat broadcast', function(obj) {
-            console.log(obj)
-            var msg = $('<li>').text(obj.user + ': ' + obj.msg)
-            console.log(msg)
-            $('#messages').append(msg)
+        socket.on('chat broadcast', function (m) {
+            console.log(m)
+            $('#messages').append($('<li>').text(m));
         })
