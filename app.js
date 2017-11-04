@@ -14,8 +14,13 @@ const app = express();
 
 const mongoose = require('mongoose');
 
+// user auth
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 //routers
 const index = require('./routes/index.js');
+const users = require('./routes/users.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,11 +37,20 @@ app.use(require('express-session')({
     resave: false,
     saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport config
+var Account = require('./models/students');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
 mongoose.connect('mongodb://webdxd:webdxd2017@ds013918.mlab.com:13918/fs-oct17', { useMongoClient:true });
 
 //routers
+app.use('/users', users);
 app.use('/', index);
 
 // catch 404 and forward to error handler
