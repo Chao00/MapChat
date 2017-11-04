@@ -49,6 +49,9 @@ block style
         }
 
 block content
+    if (user)
+        p#username=user.username
+        a(href='/users/logout') Logout
     ul#messages
     form(action="")
         input#m(autocomplete="off" required)

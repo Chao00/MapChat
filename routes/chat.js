@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('chat', {})
+    if (req.user) {
+        res.render('chat', { user : req.user })
+    } else {
+        res.redirect('/users/login');
+    }
 });
 
 module.exports = router
