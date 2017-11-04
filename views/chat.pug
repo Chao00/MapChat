@@ -59,12 +59,12 @@ block script
     script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js")
     script.
         var socket = io();
+        var color = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
         $('form').submit(function(e) {
             e.preventDefault();
-            socket.emit('chat message', $('#m').val());
+            socket.emit('chat message', { color: color, message: $('#m').val()});
             $('#m').val('')
         })
-        socket.on('chat broadcast', function (m) {
-            console.log(m)
-            $('#messages').append($('<li>').text(m));
+        socket.on('chat broadcast', function (obj) {
+            $('#messages').append($('<li>').text(obj.message).css('color', obj.color));
         })
